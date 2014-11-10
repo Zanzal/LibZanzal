@@ -1,0 +1,270 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<?xml-stylesheet href="director.xsl" type="text/xsl" ?>
+<director name="LibZanzal" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="director.xsd">
+	<documentation>
+		<author name="Zanzal" alias="Zanzal" contact="zanzal on Egosoft forums"/>
+		<content reference="LibZanzal" name="Lib Zanzal" description="Mission Director Control Library"/>
+		<version number="1.0" date="2014-01-12" status="development"/>
+	</documentation>
+	<cues>
+    <cue name="Lib_zanzal_init" delay="1s">
+      <condition>
+        <check_age value="{player.age}" min="5s" />  
+      </condition>
+      <action>
+        <do_all>
+          <load_text fileid="8100"/>
+          <create_ship name="Lib_zanzal_controlship1" race="xenon" racelogic="0" typename="SS_SH_X_M5" invincible="1" hidden="1" capturable="0" >
+            <position x="900km" y="900km" z="901km"/>
+            <sector x="0" y="0"/>
+            <command command="stay" />
+          </create_ship>
+          <create_ship name="Lib_zanzal_controlship2" race="xenon" racelogic="0" typename="SS_SH_X_M5" invincible="1" hidden="1" capturable="0" >
+            <position x="900km" y="900km" z="902km"/>
+            <sector x="0" y="0"/>
+            <command command="stay" />
+          </create_ship>
+          <create_ship name="Lib_zanzal_controlship3" race="xenon" racelogic="0" typename="SS_SH_X_M5" invincible="1" hidden="1" capturable="0" >
+            <position x="900km" y="900km" z="903km"/>
+            <sector x="0" y="0"/>
+            <command command="stay" />
+          </create_ship>
+          <create_ship name="Lib_zanzal_controlship4" race="xenon" racelogic="0" typename="SS_SH_X_M5" invincible="1" hidden="1" capturable="0" >
+            <position x="900km" y="900km" z="904km"/>
+            <sector x="0" y="0"/>
+            <command command="stay" />
+          </create_ship>
+          <create_ship name="Lib_zanzal_controlship5" race="xenon" racelogic="0" typename="SS_SH_X_M5" invincible="1" hidden="1" capturable="0" >
+            <position x="900km" y="900km" z="905km"/>
+            <sector x="0" y="0"/>
+            <command command="stay" />
+          </create_ship>
+          <create_ship name="Lib_zanzal_controlship6" race="xenon" racelogic="0" typename="SS_SH_X_M5" invincible="1" hidden="1" capturable="0" >
+            <position x="900km" y="900km" z="906km"/>
+            <sector x="0" y="0"/>
+            <command command="stay" />
+          </create_ship>
+          <create_ship name="Lib_zanzal_controlship7" race="xenon" racelogic="0" typename="SS_SH_X_M5" invincible="1" hidden="1" capturable="0" >
+            <position x="900km" y="900km" z="907km"/>
+            <sector x="0" y="0"/>
+            <command command="stay" />
+          </create_ship>
+          <create_ship name="Lib_zanzal_controlship8" race="xenon" racelogic="0" typename="SS_SH_X_M5" invincible="1" hidden="1" capturable="0" >
+            <position x="900km" y="900km" z="908km"/>
+            <sector x="0" y="0"/>
+            <command command="stay" />
+          </create_ship>
+          <create_ship name="Lib_zanzal_controlship9" race="xenon" racelogic="0" typename="SS_SH_X_M5" invincible="1" hidden="1" capturable="0" >
+            <position x="900km" y="900km" z="909km"/>
+            <sector x="0" y="0"/>
+            <command command="stay" />
+          </create_ship>
+          <run_script script="lib.zanzal">
+            <scriptargs>
+              <scriptvalue datatype="integer" datavalue="0" />
+              <scriptvalue datatype="array">
+                <scriptarray>
+                  <scriptvalue datatype="ship" datavalue="{Lib_zanzal_controlship1}" />
+                  <scriptvalue datatype="ship" datavalue="{Lib_zanzal_controlship2}" />
+                  <scriptvalue datatype="ship" datavalue="{Lib_zanzal_controlship3}" />
+                  <scriptvalue datatype="ship" datavalue="{Lib_zanzal_controlship4}" />
+                  <scriptvalue datatype="ship" datavalue="{Lib_zanzal_controlship5}" />
+                  <scriptvalue datatype="ship" datavalue="{Lib_zanzal_controlship6}" />
+                  <scriptvalue datatype="ship" datavalue="{Lib_zanzal_controlship7}" />
+                  <scriptvalue datatype="ship" datavalue="{Lib_zanzal_controlship8}" />
+                  <scriptvalue datatype="ship" datavalue="{Lib_zanzal_controlship9}" />
+                </scriptarray>
+              </scriptvalue> 
+            </scriptargs>
+          </run_script>
+        </do_all>
+      </action>
+      <cues>
+        <cue name="Lib_zanzal_create_sector" delay="1s">
+          <condition>
+            <check_value value="{object.name@Lib_zanzal_controlship1}" exact="create_sector" />
+          </condition>
+          <action>
+            <do_all>
+			  <!-- From Ketraar's RSM -->
+              <add_map>
+                <sector x="{object.name@Lib_zanzal_controlship2}" y="{object.name@Lib_zanzal_controlship3}" />
+              </add_map>
+              <find_sector name="this.sectorobj" x="{object.name@Lib_zanzal_controlship2}" y="{object.name@Lib_zanzal_controlship3}" />
+              <do_any>
+                <set_value name="this.bg" min="0" max="14"/>
+                <set_value name="this.bg" min="16" max="34"/>
+                <set_value name="this.bg" min="48" max="52"/>
+                <set_value name="this.bg" min="62" max="66"/>
+                <set_value name="this.bg" min="71" max="72"/>
+              </do_any>
+              <alter_sector sector="this.sectorobj" background="{value@this.bg}" size="100km" population="1000" />
+              <set_sector_owner sector="this.sectorobj" race="abandoned" />
+              <set_sector_override sector="this.sectorobj" textid="1200014" />
+			  <!-- End Ketraar's code -->
+              <run_script script="lib.zanzal">
+                <scriptargs>
+                  <scriptvalue datatype="integer" datavalue="1" />
+                </scriptargs>
+              </run_script>
+              <reset_cue cue="Lib_zanzal_create_sector" />
+            </do_all>
+          </action>
+        </cue>
+        <cue name="Lib_zanzal_get_value" delay="1s">
+          <condition>
+            <check_value value="{object.name@Lib_zanzal_controlship1}" exact="get_value" />
+          </condition>
+          <action>
+            <do_all>
+              <set_value name="this.get_value" exact="{{object.name@Lib_zanzal_controlship2}}"/>
+              <run_script script="lib.zanzal">
+                <scriptargs>
+                  <scriptvalue datatype="integer" datavalue="1" comment="Command 1 - CMD completed (success or fail doesn't matter)"/>
+                  <scriptvalue datatype="array" comment="Result: Dependant on the command that was called.">
+                    <scriptarray>
+                      <scriptvalue datatype="integer" datavalue="1" />
+                      <scriptvalue datatype="{object.name@Lib_zanzal_controlship3}" datavalue="{this.get_value}" />
+                    </scriptarray>
+                  </scriptvalue>
+                </scriptargs>
+              </run_script>
+              <reset_cue cue="Lib_zanzal_get_value"/>
+            </do_all>
+          </action>
+        </cue>
+        <cue name="Lib_zanzal_set_value" delay="1s">
+          <condition>
+            <check_value value="{object.name@Lib_zanzal_controlship1}" exact="set_value" />
+          </condition>
+          <timing>
+            <time exact="100" />
+          </timing>
+          <action>
+            <do_all>
+              <set_value name="{object.name@Lib_zanzal_controlship2}" exact="{{object.name@Lib_zanzal_controlship3}}"/>
+              <run_script script="lib.zanzal">
+                <scriptargs>
+                  <scriptvalue datatype="integer" datavalue="1" comment="Command 1 - CMD completed (success or fail doesn't matter)"/>
+                  <scriptvalue datatype="array" comment="Result: Dependant on the command that was called.">
+                    <scriptarray>
+                      <scriptvalue datatype="integer" datavalue="1" />
+                      <scriptvalue datatype="string" datavalue="" />
+                    </scriptarray>
+                  </scriptvalue>
+                </scriptargs>
+              </run_script>
+              <reset_cue cue="Lib_zanzal_set_value"/>
+            </do_all>
+          </action>
+        </cue>
+        <cue name="Lib_zanzal_set_object" delay="1s">
+          <condition>
+            <check_value value="{object.name@Lib_zanzal_controlship1}" exact="set_object" />
+          </condition>
+          <timing>
+            <time exact="100" />
+          </timing>
+          <action>
+            <do_all>
+              <set_object name="{object.name@Lib_zanzal_controlship2}" value="{{object.name@Lib_zanzal_controlship3}}"/>
+              <run_script script="lib.zanzal">
+                <scriptargs>
+                  <scriptvalue datatype="integer" datavalue="1" comment="Command 1 - CMD completed (success or fail doesn't matter)"/>
+                  <scriptvalue datatype="array" comment="Result: Dependant on the command that was called.">
+                    <scriptarray>
+                      <scriptvalue datatype="integer" datavalue="1" />
+                      <scriptvalue datatype="string" datavalue="{object.name@{object.name@Lib_zanzal_controlship2}}" />
+                      <scriptvalue datatype="string" datavalue="{object.name@Lib_zanzal_controlship3}" />
+                      <scriptvalue datatype="string" datavalue="{player.ship}" />
+                    </scriptarray>
+                  </scriptvalue>
+                </scriptargs>
+              </run_script>
+              <reset_cue cue="Lib_zanzal_set_object"/>
+            </do_all>
+          </action>
+        </cue>
+        <cue name="Lib_zanzal_show_help" delay="1s">
+          <condition>
+            <check_value value="{object.name@Lib_zanzal_controlship1}" exact="show_help" />
+          </condition>
+          <action>
+            <do_all>
+              <show_help duration="{object.name@Lib_zanzal_controlship2}" force="1" text="{object.name@Lib_zanzal_controlship3}" />
+              <run_script script="lib.zanzal">
+                <scriptargs>
+                  <scriptvalue datatype="integer" datavalue="1" comment="Command 1 - CMD completed (success or fail doesn't matter)"/>
+                  <scriptvalue datatype="array" comment="Result: Dependant on the command that was called.">
+                    <scriptarray>
+                      <scriptvalue datatype="integer" datavalue="1" />
+                      <scriptvalue datatype="string" datavalue="" />
+                    </scriptarray>
+                  </scriptvalue>
+                </scriptargs>
+              </run_script>
+              <reset_cue cue="Lib_zanzal_show_help"/>
+            </do_all>
+          </action>
+        </cue>
+        <cue name="Lib_zanzal_create_actor" delay="1s">
+          <condition>
+            <check_value value="{object.name@Lib_zanzal_controlship1}" exact="create_actor" />
+          </condition>
+          <action>
+            <do_all>
+              <!-- 
+              param 0 - MD variable name - used later when using the actor in other commands.
+              param 1 - Actor Name - As displayed to the player
+              param 2 - Race
+              param 3 - Subrace for Pirate/Yaki or empty string
+              param 4 - voice id page number
+              param 5 - actor's face ID
+              param 6 - MD object where the actor is located.            
+              -->
+              <create_actor name="{object.name@Lib_zanzal_controlship2}" 
+                            character="{object.name@Lib_zanzal_controlship3}" 
+                            race="{object.name@Lib_zanzal_controlship4}"     
+                            subrace="{object.name@Lib_zanzal_controlship5}"
+                            voice="{object.name@Lib_zanzal_controlship6}"
+                            face="{object.name@Lib_zanzal_controlship7}"
+                            location="crew"
+                            object="{object.name@Lib_zanzal_controlship8}"/>
+              <run_script script="lib.zanzal">
+                <scriptargs>
+                  <scriptvalue datatype="integer" datavalue="1" comment="Command 1 - CMD completed (success or fail doesn't matter)"/>
+                  <scriptvalue datatype="array" comment="Result: Dependant on the command that was called.">
+                    <scriptarray>
+                      <scriptvalue datatype="integer" datavalue="1" />
+                      <scriptvalue datatype="string" datavalue="" />
+                    </scriptarray>
+                  </scriptvalue>
+                </scriptargs>
+              </run_script>
+              <reset_cue cue="Lib_zanzal_create_actor"/>
+            </do_all>
+          </action>
+        </cue>
+        <cue name="Lib_zanzal_reinit" delay="1s">
+          <condition>
+            <check_value value="{object.name@Lib_zanzal_controlship1}" exact="reinit" />
+          </condition>
+          <action>
+            <do_all>
+              <destroy_object object="Lib_zanzal_controlship1" />
+              <destroy_object object="Lib_zanzal_controlship2" />
+              <destroy_object object="Lib_zanzal_controlship3" />
+              <destroy_object object="Lib_zanzal_controlship4" />
+              <destroy_object object="Lib_zanzal_controlship5" />
+              <destroy_object object="Lib_zanzal_controlship6" />
+              <destroy_object object="Lib_zanzal_controlship7" />
+              <destroy_object object="Lib_zanzal_controlship8" />
+              <destroy_object object="Lib_zanzal_controlship9" />
+              <reset_cue cue="Lib_zanzal_init"/>
+            </do_all>
+          </action>
+        </cue>
+      </cues>
+    </cue>
+	</cues>
+</director>  
